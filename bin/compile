@@ -4,10 +4,6 @@
 # fail fast
 set -e
 
-# config
-APACHE_VERSION="2.4.10"
-APACHE_PATH="/etc/apache2/"
-
 BIN_DIR=$(dirname $0)
 BUILD_DIR=$1
 CACHE_DIR=$2
@@ -20,19 +16,14 @@ cd $BUILD_DIR
 
 sudo apt-get update
 sudo apt-get install -qy apache2
-
-# update config files
 sudo a2dissite 000-default
-sudo cp $LP_DIR/conf/apache2.conf $APACHE_PATH
-sudo sed -i 's_Listen 80_Listen 5000_' $APACHE_PATH/ports.conf
+sudo cp /app/conf/apache2.conf /etc/apache2
+sudo sed -i 's_Listen 80_Listen 5000_' /etc/apache2/ports.conf
+sudo service apache2 stop
 
 cat >>boot.sh <<EOF
 set +x
-echo "========>boot.sh started"
-#The next line needs to be removed later.
 sudo echo '192.168.56.101 stack' >> /etc/hosts
-echo "Launching apache"
-sudo service apache2 stop
 sudo apache2ctl -DNO_DETACH
 EOF
 
