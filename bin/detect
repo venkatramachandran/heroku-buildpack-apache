@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-if [ -f $1/index.php ]; then
-  echo "PHP" && exit 0
-elif [ -f $1/index.html ]; then
+if [ -f $1/index.html ]; then
   echo "HTML" && exit 0
 else
   echo "no" && exit 1
