@@ -17,7 +17,7 @@ cd $BUILD_DIR
 sudo apt-get update
 sudo apt-get install -qy apache2
 sudo a2dissite 000-default
-sudo cp /app/conf/apache2.conf /etc/apache2
+sudo cp $LP_DIR/conf/apache2.conf /etc/apache2
 sudo sed -i 's_Listen 80_Listen 5000_' /etc/apache2/ports.conf
 sudo service apache2 stop
 
