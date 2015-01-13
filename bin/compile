@@ -25,6 +25,7 @@ sudo apt-get install -qy apache2
 sudo cp $LP_DIR/conf/apache2.conf $APACHE_PATH
 
 cat >>boot.sh <<EOF
+set +x
 #The next line needs to be removed later.
 sudo echo '192.168.56.101 stack' >> /etc/hosts
 echo "Launching apache"
