@@ -24,13 +24,12 @@ sudo apt-get install -qy apache2
 # update config files
 cp $LP_DIR/conf/apache2.conf $APACHE_PATH
 
-# make php available on bin
 
 cat >>boot.sh <<EOF
 #The next line needs to be removed later.
 sudo echo '192.168.56.101 stack' >> /etc/hosts
 echo "Launching apache"
-sudo exec apache2ctl -DNO_DETACH
+sudo apache2ctl -DNO_DETACH
 EOF
 
 chmod +x boot.sh
