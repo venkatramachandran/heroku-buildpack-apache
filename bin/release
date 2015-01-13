@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # bin/release <build-dir>
 
-echo "==================> Writing yaml"
-
 cat <<EOF
 ---
 default_process_types:

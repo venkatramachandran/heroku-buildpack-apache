@@ -22,6 +22,7 @@ sudo apt-get update
 sudo apt-get install -qy apache2
 
 # update config files
+sudo a2dissite 000-default
 sudo cp $LP_DIR/conf/apache2.conf $APACHE_PATH
 sudo sed -i 's_Listen 80_Listen 5000_' $APACHE_PATH/ports.conf
 
