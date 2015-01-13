@@ -30,7 +30,7 @@ cat >>boot.sh <<EOF
 #The next line needs to be removed later.
 sudo echo '192.168.56.101 stack' >> /etc/hosts
 echo "Launching apache"
-exec apache2ctl -DNO_DETACH
+sudo exec apache2ctl -DNO_DETACH
 EOF
 
 chmod +x boot.sh
