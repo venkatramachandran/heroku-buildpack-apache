@@ -16,7 +16,6 @@ cd $BUILD_DIR
 
 sudo apt-get update
 sudo apt-get install -qy apache2
-sudo a2dissite 000-default
 sudo cp $LP_DIR/conf/*.conf /etc/apache2
 sudo service apache2 stop
 
