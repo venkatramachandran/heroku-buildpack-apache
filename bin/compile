@@ -20,18 +20,22 @@ cd $BUILD_DIR
 
 sudo apt-get update
 sudo apt-get install -qy apache2
+echo "-----------> Apache installed."
 
 # update config files
 sudo cp $LP_DIR/conf/apache2.conf $APACHE_PATH
+echo "-----------> Copied apache2.conf"
 
 cat >>boot.sh <<EOF
 set +x
+echo "boot.sh started"
 #The next line needs to be removed later.
 sudo echo '192.168.56.101 stack' >> /etc/hosts
 echo "Launching apache"
 sudo apache2ctl -DNO_DETACH
 EOF
 
+echo "------------> Finished writing boot.sh"
 chmod +x boot.sh
 
 # clean the cache
