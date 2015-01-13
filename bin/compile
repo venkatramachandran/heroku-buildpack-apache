@@ -20,14 +20,10 @@ cd $BUILD_DIR
 
 sudo apt-get update
 sudo apt-get install -qy apache2
-echo "-----------> Apache installed."
 
 # update config files
 sudo cp $LP_DIR/conf/apache2.conf $APACHE_PATH
-echo "-----------> Copied apache2.conf"
-echo "-----------> This is the ls of $APACHE_PATH:"
-ls $APACHE_PATH
-echo "-----------> ls of $APACHE_PATH"
+sudo sed -i 's_Listen 80_Listen 5000_' $APACHE_PATH/ports.conf
 
 cat >>boot.sh <<EOF
 set +x
@@ -38,12 +34,7 @@ echo "Launching apache"
 sudo apache2ctl -DNO_DETACH
 EOF
 
-echo "------------> Finished writing boot.sh"
 chmod +x boot.sh
-
-echo "================"
-cat boot.sh
-echo "================"
 
 # clean the cache
 rm -rf $CACHE_DIR/*
