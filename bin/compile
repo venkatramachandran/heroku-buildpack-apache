@@ -32,6 +32,7 @@ echo "========>boot.sh started"
 #The next line needs to be removed later.
 sudo echo '192.168.56.101 stack' >> /etc/hosts
 echo "Launching apache"
+sudo service apache2 stop
 sudo apache2ctl -DNO_DETACH
 EOF
 
