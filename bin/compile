@@ -30,7 +30,7 @@ fi
 cat >>boot.sh <<EOF
 set +x
 HOSTS_ENTRY=`grep -q stack /etc/hosts; echo $?`
-if [ "HOSTS_ENTRY" == "1"]; then
+if [ "$HOSTS_ENTRY" == "1"]; then
   sudo echo '192.168.56.101 stack' >> /etc/hosts
 fi
 for var in \`env|cut -f1 -d=\`; do
