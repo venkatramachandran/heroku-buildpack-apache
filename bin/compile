@@ -24,6 +24,7 @@ else
   #Apache is installed. Stop apache2ctl
   echo '===========> Stopping Apache.'
   sudo apache2ctl -k stop
+  sudo cp $LP_DIR/conf/*.conf /etc/apache2
 fi
 
 cat >>boot.sh <<EOF
@@ -32,6 +33,9 @@ HOSTS_ENTRY=`grep -q stack /etc/hosts; echo $?`
 if [ "HOSTS_ENTRY" == "1"]; then
   sudo echo '192.168.56.101 stack' >> /etc/hosts
 fi
+for var in \`env|cut -f1 -d=\`; do
+  echo "PassEnv \$var" >> /etc/apache2/apache2.conf;
+done
 sudo apache2ctl -DNO_DETACH
 EOF
 
