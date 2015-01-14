@@ -14,7 +14,7 @@ shopt -s dotglob
 
 cd $BUILD_DIR
 APACHE_INSTALLED=`which apache2ctl > /dev/null && echo $?`
-if [ "$APACHE_INSTALLED" != "0" ] ; then
+if [ -z $APACHE_INSTALLED ] ; then
   #Apache not installed. Install it.
   echo '===========> Installing Apache.'
   sudo apt-get update
