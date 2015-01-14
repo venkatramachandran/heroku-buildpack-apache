@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 
+set -e
+
 BIN_DIR=$(dirname $0)
 BUILD_DIR=$1
 CACHE_DIR=$2
@@ -10,8 +12,8 @@ LP_DIR=`cd $(dirname $0); cd ..; pwd`
 shopt -s dotglob
 
 cd $BUILD_DIR
-APACHE_INSTALLED=`which apache2ctl > /dev/null && echo $?`
-if [ -z $APACHE_INSTALLED ] ; then
+APACHE_INSTALLED=`which apache2ctl > /dev/null; echo $?`
+if [ "$APACHE_INSTALLED" == "1" ] ; then
   #Apache not installed. Install it.
   echo '===========> Installing Apache.'
   sudo apt-get update
@@ -26,7 +28,10 @@ fi
 
 cat >>boot.sh <<EOF
 set +x
-sudo echo '192.168.56.101 stack' >> /etc/hosts
+HOSTS_ENTRY=`grep -q stack /etc/hosts; echo $?`
+if [ "HOSTS_ENTRY" == "1"]; then
+  sudo echo '192.168.56.101 stack' >> /etc/hosts
+fi
 sudo apache2ctl -DNO_DETACH
 EOF
 
