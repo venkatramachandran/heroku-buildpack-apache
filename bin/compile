@@ -11,13 +11,6 @@ LP_DIR=`cd $(dirname $0); cd ..; pwd`
 # include .files when moving things around
 shopt -s dotglob
 
-echo "======> Who am i"
-who am i
-
-echo "========> sudo "
-which sudo
-
-
 cd $BUILD_DIR
 APACHE_INSTALLED=`which apache2ctl > /dev/null; echo $?`
 if [ "$APACHE_INSTALLED" == "1" ] ; then
