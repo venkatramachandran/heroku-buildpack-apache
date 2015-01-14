@@ -16,15 +16,15 @@ APACHE_INSTALLED=`which apache2ctl > /dev/null; echo $?`
 if [ "$APACHE_INSTALLED" == "1" ] ; then
   #Apache not installed. Install it.
   echo '===========> Installing Apache.'
-  apt-get update
-  apt-get install -qy apache2
-  cp $LP_DIR/conf/*.conf /etc/apache2
-  service apache2 stop
+  fakeroot apt-get update
+  fakeroot apt-get install -qy apache2
+  fakeroot cp $LP_DIR/conf/*.conf /etc/apache2
+  fakeroot service apache2 stop
 else
   #Apache is installed. Stop apache2ctl
   echo '===========> Stopping Apache.'
-  apache2ctl -k stop
-  cp $LP_DIR/conf/*.conf /etc/apache2
+  fakeroot apache2ctl -k stop
+  fakeroot cp $LP_DIR/conf/*.conf /etc/apache2
 fi
 
 cat >>boot.sh <<EOF
