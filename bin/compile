@@ -33,10 +33,6 @@ HOSTS_ENTRY=\`grep -q stack /etc/hosts; echo $?\`
 if [ "\$HOSTS_ENTRY" == "1"]; then
   sudo echo '192.168.56.101 stack' >> /etc/hosts
 fi
-for var in \`env|cut -f1 -d=\`; do
-  echo "PassEnv \$var" >> /etc/apache2/apache2.conf
-  echo "=========> Adding \$var"
-done
 sudo apache2ctl -DNO_DETACH
 EOF
 
