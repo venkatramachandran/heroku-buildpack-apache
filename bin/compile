@@ -13,11 +13,17 @@ LP_DIR=`cd $(dirname $0); cd ..; pwd`
 shopt -s dotglob
 
 cd $BUILD_DIR
-
-sudo apt-get update
-sudo apt-get install -qy apache2
-sudo cp $LP_DIR/conf/*.conf /etc/apache2
-sudo service apache2 stop
+APACHE_INSTALLED=`which apache2ctl > /dev/null && echo $?`;
+if [ "$APACHE_INSTALLED" != "0" ] ; then
+  #Apache not installed. Install it.
+  sudo apt-get update
+  sudo apt-get install -qy apache2
+  sudo cp $LP_DIR/conf/*.conf /etc/apache2
+  sudo service apache2 stop
+else
+  #Apache is installed. Stop apache2ctl
+  sudo apache2ctl -k stop
+fi
 
 cat >>boot.sh <<EOF
 set +x
