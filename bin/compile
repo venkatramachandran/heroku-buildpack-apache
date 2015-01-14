@@ -16,24 +16,24 @@ APACHE_INSTALLED=`which apache2ctl > /dev/null; echo $?`
 if [ "$APACHE_INSTALLED" == "1" ] ; then
   #Apache not installed. Install it.
   echo '===========> Installing Apache.'
-  sudo apt-get update
-  sudo apt-get install -qy apache2
-  sudo cp $LP_DIR/conf/*.conf /etc/apache2
-  sudo service apache2 stop
+  apt-get update
+  apt-get install -qy apache2
+  cp $LP_DIR/conf/*.conf /etc/apache2
+  service apache2 stop
 else
   #Apache is installed. Stop apache2ctl
   echo '===========> Stopping Apache.'
-  sudo apache2ctl -k stop
-  sudo cp $LP_DIR/conf/*.conf /etc/apache2
+  apache2ctl -k stop
+  cp $LP_DIR/conf/*.conf /etc/apache2
 fi
 
 cat >>boot.sh <<EOF
 set +x
 HOSTS_ENTRY=\`grep -q stack /etc/hosts; echo $?\`
 if [ "\$HOSTS_ENTRY" == "1"]; then
-  sudo echo '192.168.56.101 stack' >> /etc/hosts
+  echo '192.168.56.101 stack' >> /etc/hosts
 fi
-sudo apache2ctl -DNO_DETACH
+apache2ctl -DNO_DETACH
 EOF
 
 chmod +x boot.sh
